@@ -1,92 +1,70 @@
-<?php 
-include 'admin/db_connect.php'; 
-?>
+<?php include 'db_connect.php' ?>
 <style>
-#portfolio .img-fluid{
-    width: calc(100%);
-    height: 30vh;
-    z-index: -1;
-    position: relative;
-    padding: 1em;
-}
-.vacancy-list{
-cursor: pointer;
-}
-span.hightlight{
-    background: yellow;
-}
+   
 </style>
-        <header class="masthead">
-            <div class="container-fluid h-100">
-                <div class="row h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-8 align-self-end mb-4 page-title">
-                    	<h3 class="text-white">Welcome to College Placement System</h3>
-                        <hr class="divider my-4" />
-                    <div class="col-md-12 mb-2 text-left">
-                        <div class="card">
+
+<div class="containe-fluid">
+
+	<div class="row">
+		<div class="col-lg-12">
+			
+		</div>
+	</div>
+
+	<div class="row mt-3 ml-3 mr-3">
+			<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+				<?php echo "Welcome back ". $_SESSION['login_name']."!"  ?>
+									
+				</div>
+				<hr>
+				<div class="row ml-2 mr-2">
+				<div class="col-md-3 offset-md-3">
+                        <div class="card bg-primary text-white mb-3">
                             <div class="card-body">
-                                  <h4 class="text-center">Find Jobs</h4>
-                               <div class="form-group">
-                                   <div class="input-group">
-                                       <input type="text" class="form-control" id="filter">
-                                       <div class="input-group-append">
-                                           <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                       </div>
-                                   </div>
-                               </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">New Applicants</div>
+                                        <div class="text-lg font-weight-bold">
+                                        	<?php 
+                                        	$applicant = $conn->query("SELECT * FROM application where process_id = 0 ");
+                                        	echo $applicant->num_rows;
+                                        	 ?>
+                                        		
+                                    	</div>
+                                    </div>
+                                    <i class="fa fa-user-tie"></i>
+                                </div>
                             </div>
-                        </div>
-                    </div>                        
+                            
                     </div>
-                    
-                </div>
-            </div>
-        </header>
-        <section id="list">
-            <div class="container mt-3 pt-2">
-                <h4 class="text-center">Jobs List</h4>
-                <hr class="divider">
-                <?php
-                $vacancy = $conn->query("SELECT * FROM vacancy order by date(date_created) desc ");
-                while($row = $vacancy->fetch_assoc()):
-                    $trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
-                    unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
-                    $desc = strtr(html_entity_decode($row['description']),$trans);
-                    $desc=str_replace(array("<li>","</li>"), array("",","), $desc);
-                ?>
-                <div class="card vacancy-list" data-id="<?php echo $row['id'] ?>">
-                    <div class="card-body">
-                        <h3><b class="filter-txt"><?php echo $row['position'] ?></b></h3>
-                        <span><small>Needed: <?php echo $row['availability'] ?></small></span>
-                        <hr>
-                        <larger class="truncate filter-txt"><?php echo strip_tags($desc) ?></larger>
-                        <br>
-                        <hr class="divider"  style="max-width: calc(80%)">
-
+		      </div>
+              <div class="col-md-3">
+                  <div class="card bg-warning text-white mb-3">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">Active Vacanies</div>
+                                        <div class="text-lg font-weight-bold">
+                                            <?php 
+                                            $vacancies = $conn->query("SELECT * FROM vacancy where status = 1  ");
+                                            echo $vacancies->num_rows;
+                                             ?>
+                                                
+                                        </div>
+                                    </div>
+                                    <i class="fa fa-search"></i>
+                                </div>
+                            </div>
+                            
                     </div>
-                </div>
-                <br>
-                <?php endwhile; ?>
-            </div>
-        </section>
+              </div>
+		</div>
+    </div>
+	</div>
 
-
+</div>
 <script>
-    $('.card.vacancy-list').click(function(){
-        location.href = "index.php?page=view_vacancy&id="+$(this).attr('data-id')
-    })
-    $('#filter').keyup(function(e){
-        var filter = $(this).val()
-
-        $('.card.vacancy-list .filter-txt').each(function(){
-            var txto = $(this).html();
-            txt = txto
-            if((txt.toLowerCase()).includes((filter.toLowerCase())) == true){
-                $(this).closest('.card').toggle(true)
-            }else{
-                $(this).closest('.card').toggle(false)
-               
-            }
-        })
-    })
+	
 </script>

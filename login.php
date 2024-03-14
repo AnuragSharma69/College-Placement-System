@@ -1,70 +1,24 @@
-<?php
-session_start();
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve form data
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    // Database connection
-    $servername = "localhost";
-    $username_db = "root";
-    $password_db = "";
-    $dbname = "recruitment_db";
-
-    $conn = new mysqli($servername, $username_db, $password_db, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Use prepared statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT * FROM student_login WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    
-    // Execute SQL query
-    if ($stmt->execute()) {
-        $result = $stmt->get_result();
-
-        if ($result->num_rows == 1) {
-            $row = $result->fetch_assoc();
-
-            // Verify password
-            if (password_verify($password, $row['password'])) {
-                // Set session variables
-                $_SESSION["username"] = $username;
-
-                // Redirect to index.php
-                header("Location: index.php");
-                exit();
-            } else {
-                echo "Incorrect password!";
-            }
-        } else {
-            echo "User not found!";
-        }
-    } else {
-        echo "Login failed. Please try again later.";
-    }
-
-    // Close the database connection
-    $stmt->close();
-    $conn->close();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Login</title>
-    
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Admin | College Placement System</title>
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-    
+
+    <?php include('./header.php'); ?>
+    <?php include('./db_connect.php'); ?>
+
+    <?php
+    session_start();
+    if (isset($_SESSION['login_id']))
+        header("location:index.php?page=home");
+    ?>
+
     <style media="screen">
         *,
         *:before,
@@ -73,10 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #080710;
         }
+
         .background {
             width: 430px;
             height: 520px;
@@ -135,13 +91,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border: none;
         }
 
-        h2 {
-            display: block;
+        form h3 {
             font-size: 32px;
             font-weight: 500;
             line-height: 42px;
             text-align: center;
-            color: #ffffff;
         }
 
         label {
@@ -207,17 +161,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </style>
 </head>
+
 <body>
-    <h2>Student Login</h2>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br>
-
-        <label for="password">Password:</label>
-        <input type="password" name="password" required><br>
-
-        <input type="submit" value="Login">
-        <br>
+    <form id="login-form">
+        <h3>Admin Login</h3>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+        </div>
+        <button type="submit">Login</button>
     </form>
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 </body>
+
+<script>
+    $('#login-form').submit(function(e) {
+        e.preventDefault();
+        $('#login-form button[type="submit"]').attr('disabled', true).html('Logging in...');
+        if ($(this).find('.alert-danger').length > 0)
+            $(this).find('.alert-danger').remove();
+        $.ajax({
+            url: 'ajax.php?action=login',
+            method: 'POST',
+            data: $(this).serialize(),
+            error: err => {
+                console.log(err)
+                $('#login-form button[type="submit"]').removeAttr('disabled').html('Login');
+            },
+            success: function(resp) {
+                if (resp == 1) {
+                    location.href = 'index.php?page=home';
+                } else if (resp == 2) {
+                    location.href = 'voting.php';
+                } else {
+                    $('#login-form').prepend('<div class="alert alert-danger">Username or password is incorrect.</div>')
+                    $('#login-form button[type="submit"]').removeAttr('disabled').html('Login');
+                }
+            }
+        })
+    })
+</script>
+
 </html>
