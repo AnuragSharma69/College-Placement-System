@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Lxr Placement World</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: auto;
+        padding: auto;
+      }
+
+      body {
+        background-color: rgb(2, 2, 54);
+        color: white;
+        font-family: "Poppins", sans-serif;
+      }
+      nav {
+        display: FLEX;
+        justify-content: space-around;
+        align-items: center;
+        height: 80px;
+        background-color: rgb(6, 6, 58);
+      }
+      nav ul {
+        display: flex;
+        justify-content: center;
+      }
+      nav ul li {
+        list-style: none;
+        margin: 0 23px;
+      }
+
+      nav ul a {
+        text-decoration: none;
+        color: rgb(171, 215, 70);
+      }
+      nav ul a:hover {
+        color: rgb(163, 163, 239);
+        font-size: 1.05rem;
+      }
+      main hr {
+        border: 0;
+        background-color: rgb(161, 120, 199);
+        height: 1.2px;
+      }
+
+      .left {
+        font-size: 1.3rem;
+      }
+      .firstsection {
+        display: flex;
+        justify-content: space-around;
+        margin: 50px 0;
+      }
+      .firstsection > div {
+        width: 30%;
+      }
+      .leftsection {
+        font-size: 2.1rem;
+      }
+      .purple {
+        color: blueviolet;
+      }
+      .secondsection {
+        max-width: 80vw;
+        margin: auto;
+      }
+      .secondsection h1 {
+        color: rgb(171, 215, 70);
+        font-size: 1.9rem;
+      }
+      .secondsection .box {
+        background-color: white;
+        width: 80vw;
+        height: 2px;
+        margin: 56px 0;
+        display: flex;
+      }
+      .secondsection .Vertical {
+        height: 93px;
+        width: 1px;
+        background-color: white;
+        margin: 0px 100px;
+      }
+      .text-gray {
+        color: rgb(146, 75, 212);
+      }
+      #element {
+        color: blueviolet;
+      }
+      .image-top {
+        width: 202px;
+      }
+      .vetical-title {
+        top: 75px;
+        width: 150px;
+        position: relative;
+      }
+      .vertical-desc {
+        top: 86px;
+        color: gray;
+        font-size: 9px;
+        width: 150px;
+      }
+      .kg {
+        max-width: 100%;
+        height: auto;
+      }
+      @media screen and (min-width: 992px) {
+        .blog-content {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .about-content {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          column-gap: 3rem;
+          align-items: center;
+        }
+      }
+
+      @media screen and (min-width: 1200px) {
+        .design-content {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .design-item{
+    cursor: pointer;
+    margin: 1.5rem 0;
+}
+.design-img{
+    position: relative;
+    overflow: hidden;
+}
+.design-img::after{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+.about-content img{
+    transition:  all 0.5s ease;
+}
+.design-item:hover img{
+    transform: scale(1.2);
+}
+.about-content span:first-of-type{
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    left: 10px;
+    background: var(--exDark);
+    color: #fff;
+    padding: 0.25rem 1rem;
+}
+.about-content span:last-of-type{
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
+    right: 10px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+/* footer */
+footer{
+    background: var(--exDark);
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+}
+.footer span{
+    margin-top: 1rem;
+    display: block;
+    font-family: var(--Playfair);
+    letter-spacing: 2px;
+}
+
+
+
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="left">COLLEGE PLACEMENT SYSTEM</div>
+        <div class="right">
+          <ul>
+            <li>
+              <a
+                href="http://localhost/clg_placement_system/About Placement/"
+                >About Placements</a
+              >
+            </li>
+            <li>
+              <a
+                href="http://localhost/clg_placement_system/register.php"
+                >Student register</a
+              >
+            </li>
+            <li>
+              <a
+                href="http://localhost/clg_placement_system/login.php"
+                >Student Login</a
+              >
+            </li>
+            <li>
+              <a
+                href="http://localhost/clg_placement_system/admin/login.php"
+                >Admin Login</a
+              >
+            </li>
+            <li>
+              <a
+                href="http://localhost/clg_placement_system/chatbot/index.html"
+                >ChatBot</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="firstsection">
+        <div class="leftsection">
+          WELCOME TO OUR <span class="purple">SRMS CET Bareilly.</span>
+          <div>WE HAVE 100% PLACEMENT IN OUR COLLEGE , BEHALF OF</div>
+          <span id="element"></span>
+        </div>
+
+        <div class="rightsection">
+          <img src="CET-Building.jpg" height="400" width="500"/>
+        </div>
+      </section>
+      <hr />
+      <section class="secondsection" id="about">
+        <div class="container">
+          
+          <div class="about-content">
+            <div class="design-item">
+              <img src="forspoken-magic-portrait.jpg" class="kg" />
+              <div>
+              </div>
+          </div>
+            <div class="about-text">
+              <div class="title">
+                <br /><br /><br />
+                <h2>Unreal Engine 5</h2>
+                <p>Open World, Cinematic , Game Developer and BFX Designer</p>
+              </div>
+              <p>
+                In today's rapidly evolving job market, an institute that values
+                knowledge in cinematic arts, open-world design, and game
+                creation is well-positioned to prepare its students for exciting
+                and dynamic careers. The convergence of technology and
+                entertainment has led to a significant demand for professionals
+                who can bring immersive experiences to life through various
+                media forms. By offering opportunities to learn about cinematic
+                arts, open-world environments, and game creation, this institute
+                equips its students with the skills and expertise necessary to
+                thrive in this innovative and competitive landscape. <br />
+                <br />
+                Cinematic arts form a crucial component of modern storytelling.
+                Visual narratives, whether in films, video games, or virtual
+                reality experiences, rely on compelling visuals, effective
+                camera techniques, and artistic direction to engage and
+                captivate audiences. Students who delve into cinematic arts gain
+                a deep understanding of visual language, pacing, and emotional
+                resonance, enabling them to craft narratives that resonate with
+                viewers on a profound level.
+                
+                <br />
+                
+                Game creation encompasses a wide range of skills, from
+                programming and level design to character development and sound
+                engineering. Students who delve into game creation gain a
+                holistic understanding of the game development process, enabling
+                them to collaborate effectively with multidisciplinary teams and
+                bring innovative concepts to life. This skillset not only opens
+                doors to careers in the gaming industry but also translates to
+                various other fields, such as simulation, virtual reality, and
+                even architectural visualization.
+              </p>
+              <p>
+                We help students to succes in their life and provide placements
+                to them.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <br /><br /><br />
+      <hr />
+      <section class="secondsection" id="about">
+        <div class="container">
+          <div class="about-content">
+            <div>
+              <div class="design-item">
+
+                <img src="bg.png" class="kg" />
+
+              </div>
+            </div>
+            <div class="about-text">
+              <div class="title">
+                <br><br><br>
+                <h2>Web Development</h2>
+              </div>
+              <p>
+                In the contemporary professional landscape, proficiency in web
+                development has become a coveted and essential skill, and an
+                institute that places a strong emphasis on cultivating this
+                expertise is poised to empower its students with promising job
+                prospects.
+                <br />
+                Web development is the backbone of the modern internet
+                ecosystem. With the continuous growth of e-commerce, digital
+                marketing, and online services, businesses rely heavily on
+                well-designed and functional websites to connect with their
+                audiences and facilitate transactions. Students who are
+                well-versed in web development gain the ability to create
+                visually appealing, user-friendly, and responsive websites that
+                cater to the diverse needs of clients and consumers.
+                <br />
+                <br />
+                In conclusion, our institute that prioritizes education in web
+                development is positioning its students for success in a
+                technology-driven world. By imparting technical skills,
+                fostering adaptability, and nurturing a strong foundation in
+                digital innovation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <br><br>
+      <hr />
+      <section class="secondsection" id="about">
+        <div class="container">
+          <div class="about-content">
+            <div>
+              <div class="design-item">
+
+                <img src="Picture1-768x512.png" class="kg" />
+              </div>
+            </div>
+            <div class="about-text">
+              <div class="title">
+                <br /><br /><br />
+                <h2>Artificial Intelligence and Machine Learning</h2>
+                <p>Leading in the World.</p>
+              </div>
+              <p>
+                The field of Machine Learning (ML) and Artificial Intelligence
+                (AI) has seen explosive growth in recent years, transforming
+                industries and creating a demand for professionals with
+                specialized skills. Job opportunities in ML and AI are diverse,
+                ranging from research and development to practical applications
+                across various sectors. Here are some key roles and positions
+                within the ML and AI field: Machine Learning Engineer: These
+                engineers design and develop ML models and systems, utilizing
+                programming languages like Python and frameworks such as
+                TensorFlow or PyTorch. They focus on data preprocessing, model
+                training, optimization, and deployment. Data Scientist: Data
+                scientists analyze complex data sets to extract valuable
+                insights and patterns. They utilize statistical analysis and
+                machine learning techniques to solve real-world problems and
+                inform decision-making. AI Research Scientist: Research
+                scientists in AI focus on pushing the boundaries of AI
+                capabilities. They work on developing novel algorithms,
+                conducting experiments, and publishing research papers in
+                conferences and journ <br />
+                
+              </div>
+          </div>
+        </div>
+      </section>
+      <br><br>
+      <footer>
+        <span>College Placement System by @anurag-Sharma</span>
+      </footer>
+      <br><br>
+      
+    </main>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+      var typed = new Typed("#element", {
+        strings: ["SRMS Placement Cell."],
+        typeSpeed: 50,
+      });
+      </script>
+     
+    </body>
+    </html>
